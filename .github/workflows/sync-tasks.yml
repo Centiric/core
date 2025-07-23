@@ -1,0 +1,16 @@
+name: Sync Tasks
+on:
+  push:
+    paths: 'TASKS.md'
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions-ecosystem/action-regex-match@v2
+        with:
+          text: ${{ github.event.commits[0].message }}
+          regex: 'sync:(.*)'
+      - run: |
+          echo "## Updated Tasks" >> $GITHUB_STEP_SUMMARY
+          curl -X POST ${{ secrets.PROJECT_BOARD_WEBHOOK }} \
+            -d '{"task": "${{ steps.match.outputs.group1 }}"}'
