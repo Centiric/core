@@ -1,9 +1,10 @@
-## core/TASKS.md
+## Yönlendirme Modülü
 
-### Öncelikli Görevler
-1. [ ] **call_router.go**: Yönlendirme motoru (@dev1)
-   - Deadline: 2023-10-30
-   - Bağımlılık: signal#5
-   ```go
-   func Route(call Call) error { /* ... */ }
-   ```
+✅ 2023-10-10: Temel yapı oluşturuldu (@ai)  
+🔄 2023-10-15: Rule engine implementasyonu (@ai)  
+```rust
+// TODO: Kural parser ekle
+fn parse_rule(rule: str) -> Result<Route> {
+  // ...
+}
+```
