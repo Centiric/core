@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "github.com/Centiric/core/proto"; // BU SATIR ÇOK ÖNEMLİ!
+option go_package = "github.com/Centiric/core/proto";
 
 package voipcore;
 

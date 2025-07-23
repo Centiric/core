@@ -1,8 +1,10 @@
-// call_router.go
 package main
 
 import (
 	"context"
+	"fmt"
+	"time"
+
 	pb "github.com/Centiric/core/proto"
 )
 
@@ -12,6 +14,6 @@ func (s *voipServer) RouteCall(ctx context.Context, req *pb.CallRequest) (*pb.Ca
 	}
 	return &pb.CallResponse{
 		Status:    pb.CallResponse_OK,
-		SessionId: "sess_" + fmt.Sprintf("%x", time.Now().UnixNano()),
+		SessionId: fmt.Sprintf("sess_%x", time.Now().UnixNano()),
 	}, nil
 }

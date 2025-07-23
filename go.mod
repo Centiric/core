@@ -5,9 +5,8 @@ go 1.23.0
 toolchain go1.24.5
 
 require (
-	github.com/pion/webrtc/v3 v3.3.5
 	google.golang.org/grpc v1.74.2
-	google.golang.org/protobuf v1.36.6
+	google.golang.org/protobuf v1.34.1
 )
 
 require (
