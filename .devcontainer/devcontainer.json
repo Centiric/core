@@ -1,0 +1,13 @@
+{
+  "customizations": {
+    "vscode": {
+      "extensions": ["golang.Go", "zxh404.vscode-proto3"]
+    }
+  },
+  "portsAttributes": {
+    "5060": {
+      "label": "gRPC",
+      "onAutoForward": "notify"
+    }
+  }
+}

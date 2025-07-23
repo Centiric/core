@@ -1,11 +1,7 @@
-## Yönlendirme Modülü
+## 2023-10-16 İlerleme
+✅ **gRPC servis temeli**  
+- [x] Protobuf tanımları (`proto/core.proto`)  
+- [x] Temel çağrı yönlendirme (`call_router.go`)  
 
-✅ 2023-10-10: Temel yapı oluşturuldu (@ai)  
-🔄 2023-10-15: Rule engine implementasyonu (@ai)  
-```rust
-// TODO: Kural parser ekle
-fn parse_rule(rule: str) -> Result<Route> {
-  // ...
-}
-```
-## Çağrı Yönlendirme
+🔄 **Sonraki Adımlar**  
+- [ ] SIP sinyalizasyon entegrasyonu 
