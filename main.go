@@ -1,17 +1,17 @@
 package main
 
 import (
-	"context"
-	"fmt"
 	"log"
 	"net"
-	"time"
+
 	"google.golang.org/grpc"
-	pb "github.com/Centiric/core/proto"
+	// YENİ: Reflection paketini import ediyoruz
+	"github.com/Centiric/core/proto"
+	"google.golang.org/grpc/reflection"
 )
 
 type voipServer struct {
-	pb.UnimplementedVoipCoreServer
+	proto.UnimplementedVoipCoreServer
 }
 
 func main() {
@@ -21,7 +21,12 @@ func main() {
 	}
 
 	s := grpc.NewServer()
-	pb.RegisterVoipCoreServer(s, &voipServer{})
+	proto.RegisterVoipCoreServer(s, &voipServer{})
+
+	// YENİ: Bu satır, gRPC sunucusuna yansıma özelliğini kaydediyor.
+	// Artık grpcurl gibi araçlar sunucuyu keşfedebilir.
+	reflection.Register(s)
+
 	log.Printf("Server started at %v", lis.Addr())
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
