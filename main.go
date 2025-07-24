@@ -1,38 +1,43 @@
-// C:\centric\core\main.go
-
 package main
 
 import (
-	"log"
+	"fmt"
 	"net"
 
+	"github.com/Centiric/core/config"
+	"github.com/Centiric/core/logger"
+	"github.com/rs/zerolog/log"
+
+	corepb "github.com/Centiric/core/proto/core"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
-
-	// 'proto' yerine 'corepb' takma adını kullanıyoruz
-	corepb "github.com/Centiric/core/proto/core"
 )
 
-// 'proto.' yerine 'corepb.' kullanıyoruz
 type voipServer struct {
 	corepb.UnimplementedVoipCoreServer
+	config config.Config // Konfigürasyonu sunucu içinde tutalım
 }
 
 func main() {
-	lis, err := net.Listen("tcp", ":50051")
+	cfg, err := config.LoadConfig()
 	if err != nil {
-		log.Fatalf("failed to listen: %v", err)
+		log.Fatal().Err(err).Msg("Konfigürasyon yüklenemedi")
+	}
+
+	logger.Initialize(cfg.Log.Level)
+
+	listenAddr := fmt.Sprintf("%s:%d", cfg.Grpc.Host, cfg.Grpc.Port)
+	lis, err := net.Listen("tcp", listenAddr)
+	if err != nil {
+		log.Fatal().Err(err).Str("address", listenAddr).Msg("Dinleme başlatılamadı")
 	}
 
 	s := grpc.NewServer()
-
-	// 'proto.' yerine 'corepb.' kullanıyoruz
-	corepb.RegisterVoipCoreServer(s, &voipServer{})
-
+	corepb.RegisterVoipCoreServer(s, &voipServer{config: cfg})
 	reflection.Register(s)
 
-	log.Printf("Server started at :%s", "50051")
+	log.Info().Str("address", listenAddr).Msg("gRPC sunucusu başlatıldı")
 	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
+		log.Fatal().Err(err).Msg("Sunucu çalışırken hata oluştu")
 	}
 }

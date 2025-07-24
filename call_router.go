@@ -1,13 +1,10 @@
-// C:\centric\core\call_router.go
-
 package main
 
 import (
 	"context"
-	"fmt"
-	"log"
 	"time"
 
+	"github.com/rs/zerolog/log"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 
@@ -16,42 +13,39 @@ import (
 )
 
 func (s *voipServer) RouteCall(ctx context.Context, req *corepb.CallRequest) (*corepb.CallResponse, error) {
-	log.Printf("[CORE] RouteCall isteği alındı: From=%s, To=%s", req.From, req.To)
+	// Artık zerolog ile yapılandırılmış loglama yapıyoruz
+	log.Info().Str("from", req.From).Str("to", req.To).Msg("RouteCall isteği alındı")
 
-	log.Println("[CORE] Media servisine bağlanılıyor (localhost:50052)...")
+	mediaAddr := s.config.Services.Media.Address
+	log.Debug().Str("address", mediaAddr).Msg("Media servisine bağlanılıyor...")
 
-	conn, err := grpc.NewClient("localhost:50052", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.NewClient(mediaAddr, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
-		// ...
+		log.Error().Err(err).Str("address", mediaAddr).Msg("Media servisine bağlanılamadı")
+		return &corepb.CallResponse{Status: corepb.CallResponse_FAILED}, nil
 	}
 	defer conn.Close()
 
 	mediaClient := mediapb.NewMediaManagerClient(conn)
 
-	log.Println("[CORE] Media servisinden RTP portu isteniyor...")
-
-	// --- DÜZELTME BURADA ---
-	// `context.Background()` yerine, fonksiyona gelen orijinal `ctx`'i kullanıyoruz.
-	// Bu, eğer `signal`'dan gelen isteğin bir timeout'u varsa, o timeout'un
-	// `media`'ya yapılan isteğe de yansımasını sağlar.
 	mediaCtx, cancel := context.WithTimeout(ctx, time.Second*5)
-	// ----------------------
 	defer cancel()
 
-	// mediaCtx'i kullanarak isteği gönder
+	log.Debug().Msg("Media servisinden RTP portu isteniyor...")
 	mediaRes, err := mediaClient.AllocatePort(mediaCtx, &mediapb.AllocatePortRequest{})
 	if err != nil {
-		log.Printf("[HATA] Media servisinden port alınamadı: %v", err)
+		log.Error().Err(err).Msg("Media servisinden port alınamadı")
 		return &corepb.CallResponse{Status: corepb.CallResponse_FAILED}, nil
 	}
 
 	rtpPort := mediaRes.GetPort()
-	log.Printf("[CORE] Media servisinden port başarıyla alındı: %d", rtpPort)
+	log.Info().Uint32("rtp_port", rtpPort).Msg("Media servisinden port başarıyla alındı")
 
-	sessionID := fmt.Sprintf("sess_%x_port_%d", time.Now().UnixNano(), rtpPort)
+	sessionID := "sess_" + time.Now().Format("20060102150405")
 
 	return &corepb.CallResponse{
 		Status:    corepb.CallResponse_OK,
 		SessionId: sessionID,
+		RtpPort:   rtpPort, // <-- TEMİZ VE DOĞRU YÖNTEM
 	}, nil
 }

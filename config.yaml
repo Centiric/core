@@ -1,0 +1,16 @@
+# core/config.yaml
+
+# Core servisin kendi gRPC sunucusu ayarları
+grpc:
+  host: "0.0.0.0"
+  port: 50051
+
+# Bağlanacağı diğer servislerin adresleri
+services:
+  media:
+    # Bu adresi Docker veya Kubernetes ortamlarında servis adına çevirebiliriz
+    address: "localhost:50052" 
+
+# Loglama ayarları
+log:
+  level: "info" # debug, info, warn, error olabilir
