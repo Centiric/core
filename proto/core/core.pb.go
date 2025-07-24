@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v6.32.0--rc1
-// source: proto/core.proto
+// source: proto/core/core.proto
 
 package proto
 
@@ -51,11 +51,11 @@ func (x CallResponse_Status) String() string {
 }
 
 func (CallResponse_Status) Descriptor() protoreflect.EnumDescriptor {
-	return file_proto_core_proto_enumTypes[0].Descriptor()
+	return file_proto_core_core_proto_enumTypes[0].Descriptor()
 }
 
 func (CallResponse_Status) Type() protoreflect.EnumType {
-	return &file_proto_core_proto_enumTypes[0]
+	return &file_proto_core_core_proto_enumTypes[0]
 }
 
 func (x CallResponse_Status) Number() protoreflect.EnumNumber {
@@ -64,7 +64,7 @@ func (x CallResponse_Status) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use CallResponse_Status.Descriptor instead.
 func (CallResponse_Status) EnumDescriptor() ([]byte, []int) {
-	return file_proto_core_proto_rawDescGZIP(), []int{1, 0}
+	return file_proto_core_core_proto_rawDescGZIP(), []int{1, 0}
 }
 
 type CallRequest struct {
@@ -77,7 +77,7 @@ type CallRequest struct {
 
 func (x *CallRequest) Reset() {
 	*x = CallRequest{}
-	mi := &file_proto_core_proto_msgTypes[0]
+	mi := &file_proto_core_core_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -89,7 +89,7 @@ func (x *CallRequest) String() string {
 func (*CallRequest) ProtoMessage() {}
 
 func (x *CallRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_core_proto_msgTypes[0]
+	mi := &file_proto_core_core_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -102,7 +102,7 @@ func (x *CallRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CallRequest.ProtoReflect.Descriptor instead.
 func (*CallRequest) Descriptor() ([]byte, []int) {
-	return file_proto_core_proto_rawDescGZIP(), []int{0}
+	return file_proto_core_core_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *CallRequest) GetFrom() string {
@@ -129,7 +129,7 @@ type CallResponse struct {
 
 func (x *CallResponse) Reset() {
 	*x = CallResponse{}
-	mi := &file_proto_core_proto_msgTypes[1]
+	mi := &file_proto_core_core_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -141,7 +141,7 @@ func (x *CallResponse) String() string {
 func (*CallResponse) ProtoMessage() {}
 
 func (x *CallResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_proto_core_proto_msgTypes[1]
+	mi := &file_proto_core_core_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -154,7 +154,7 @@ func (x *CallResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CallResponse.ProtoReflect.Descriptor instead.
 func (*CallResponse) Descriptor() ([]byte, []int) {
-	return file_proto_core_proto_rawDescGZIP(), []int{1}
+	return file_proto_core_core_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *CallResponse) GetStatus() CallResponse_Status {
@@ -171,11 +171,11 @@ func (x *CallResponse) GetSessionId() string {
 	return ""
 }
 
-var File_proto_core_proto protoreflect.FileDescriptor
+var File_proto_core_core_proto protoreflect.FileDescriptor
 
-const file_proto_core_proto_rawDesc = "" +
+const file_proto_core_core_proto_rawDesc = "" +
 	"\n" +
-	"\x10proto/core.proto\x12\bvoipcore\"1\n" +
+	"\x15proto/core/core.proto\x12\bvoipcore\"1\n" +
 	"\vCallRequest\x12\x12\n" +
 	"\x04from\x18\x01 \x01(\tR\x04from\x12\x0e\n" +
 	"\x02to\x18\x02 \x01(\tR\x02to\"\x82\x01\n" +
@@ -191,25 +191,25 @@ const file_proto_core_proto_rawDesc = "" +
 	"\tRouteCall\x12\x15.voipcore.CallRequest\x1a\x16.voipcore.CallResponseB Z\x1egithub.com/Centiric/core/protob\x06proto3"
 
 var (
-	file_proto_core_proto_rawDescOnce sync.Once
-	file_proto_core_proto_rawDescData []byte
+	file_proto_core_core_proto_rawDescOnce sync.Once
+	file_proto_core_core_proto_rawDescData []byte
 )
 
-func file_proto_core_proto_rawDescGZIP() []byte {
-	file_proto_core_proto_rawDescOnce.Do(func() {
-		file_proto_core_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_core_proto_rawDesc), len(file_proto_core_proto_rawDesc)))
+func file_proto_core_core_proto_rawDescGZIP() []byte {
+	file_proto_core_core_proto_rawDescOnce.Do(func() {
+		file_proto_core_core_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_proto_core_core_proto_rawDesc), len(file_proto_core_core_proto_rawDesc)))
 	})
-	return file_proto_core_proto_rawDescData
+	return file_proto_core_core_proto_rawDescData
 }
 
-var file_proto_core_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_proto_core_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_proto_core_proto_goTypes = []any{
+var file_proto_core_core_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_proto_core_core_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_proto_core_core_proto_goTypes = []any{
 	(CallResponse_Status)(0), // 0: voipcore.CallResponse.Status
 	(*CallRequest)(nil),      // 1: voipcore.CallRequest
 	(*CallResponse)(nil),     // 2: voipcore.CallResponse
 }
-var file_proto_core_proto_depIdxs = []int32{
+var file_proto_core_core_proto_depIdxs = []int32{
 	0, // 0: voipcore.CallResponse.status:type_name -> voipcore.CallResponse.Status
 	1, // 1: voipcore.VoipCore.RouteCall:input_type -> voipcore.CallRequest
 	2, // 2: voipcore.VoipCore.RouteCall:output_type -> voipcore.CallResponse
@@ -220,27 +220,27 @@ var file_proto_core_proto_depIdxs = []int32{
 	0, // [0:1] is the sub-list for field type_name
 }
 
-func init() { file_proto_core_proto_init() }
-func file_proto_core_proto_init() {
-	if File_proto_core_proto != nil {
+func init() { file_proto_core_core_proto_init() }
+func file_proto_core_core_proto_init() {
+	if File_proto_core_core_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_core_proto_rawDesc), len(file_proto_core_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_proto_core_core_proto_rawDesc), len(file_proto_core_core_proto_rawDesc)),
 			NumEnums:      1,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_proto_core_proto_goTypes,
-		DependencyIndexes: file_proto_core_proto_depIdxs,
-		EnumInfos:         file_proto_core_proto_enumTypes,
-		MessageInfos:      file_proto_core_proto_msgTypes,
+		GoTypes:           file_proto_core_core_proto_goTypes,
+		DependencyIndexes: file_proto_core_core_proto_depIdxs,
+		EnumInfos:         file_proto_core_core_proto_enumTypes,
+		MessageInfos:      file_proto_core_core_proto_msgTypes,
 	}.Build()
-	File_proto_core_proto = out.File
-	file_proto_core_proto_goTypes = nil
-	file_proto_core_proto_depIdxs = nil
+	File_proto_core_core_proto = out.File
+	file_proto_core_core_proto_goTypes = nil
+	file_proto_core_core_proto_depIdxs = nil
 }

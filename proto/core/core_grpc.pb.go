@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v6.32.0--rc1
-// source: proto/core.proto
+// source: proto/core/core.proto
 
 package proto
 
@@ -117,5 +117,5 @@ var VoipCore_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/core.proto",
+	Metadata: "proto/core/core.proto",
 }
